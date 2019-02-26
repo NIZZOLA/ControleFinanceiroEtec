@@ -1,0 +1,16 @@
+
+
+- uma conta é criada sempre ativa.
+- uma conta tem que ter :
+   agencia
+   numero
+   digitos
+   saldo
+   um cliente  (ativo)
+
+
+   uma conta pode ser criada com informação
+da data de abertura ou caso não informe, deve
+assumir a data do dia.
+   toda conta aberta será incialmente ativa
+   a data de fechamento sempre será nula.
