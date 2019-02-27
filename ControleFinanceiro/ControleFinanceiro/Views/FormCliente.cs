@@ -31,6 +31,12 @@ namespace ControleFinanceiro.Views
                 return false;
             }
 
+            if( ! DateTime.TryParse( mskNascimento.Text, out DateTime data ) )
+            {
+                MessageBox.Show("A data de nascimento não é válida !");
+                return false;
+            }
+
             return true;
         }
 
