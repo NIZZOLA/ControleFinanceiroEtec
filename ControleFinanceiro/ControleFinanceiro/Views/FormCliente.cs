@@ -30,22 +30,30 @@ namespace ControleFinanceiro.Views
             string mensagem = "";
             bool retorno = true;
 
-            if( ! Helpers.ValidaCpf( mskCpf.Text ))
+            if (!Helpers.ValidaCpf(mskCpf.Text))
             {
                 mensagem += "O CPF não é válido !\n";
                 mskCpf.BackColor = Color.Red;
                 retorno = false;
             }
 
-            if( ! DateTime.TryParse( mskNascimento.Text, out DateTime data ) )
+            if (!DateTime.TryParse(mskNascimento.Text, out DateTime data))
             {
                 mensagem += "A data de nascimento não é válida !\n";
                 mskNascimento.BackColor = Color.Red;
                 retorno = false;
             }
 
-            if( mensagem != "")
-                MessageBox.Show(mensagem);
+            if( ! Helpers.ValidarEmail( txtEmail.Text ) )
+            {
+                mensagem += "O campo e-mail não é valido !\n";
+                txtEmail.BackColor = Color.Red;
+                retorno = false;
+            }
+
+            if (mensagem != "")
+                MessageBox.Show(mensagem, "ERRO DE PREENCHIMENTO",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return retorno;
         }
@@ -54,6 +62,7 @@ namespace ControleFinanceiro.Views
         {
             mskNascimento.BackColor = Color.White;
             mskCpf.BackColor = Color.White;
+            txtEmail.BackColor = Color.White;
         }
 
 
