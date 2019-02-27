@@ -19,26 +19,43 @@ namespace ControleFinanceiro.Views
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            LimpaCores();
+
             if (!Validate())
                 return;
         }
 
         private bool Validate()
         {
+            string mensagem = "";
+            bool retorno = true;
+
             if( ! Helpers.ValidaCpf( mskCpf.Text ))
             {
-                MessageBox.Show("O CPF não é válido !");
-                return false;
+                mensagem += "O CPF não é válido !\n";
+                mskCpf.BackColor = Color.Red;
+                retorno = false;
             }
 
             if( ! DateTime.TryParse( mskNascimento.Text, out DateTime data ) )
             {
-                MessageBox.Show("A data de nascimento não é válida !");
-                return false;
+                mensagem += "A data de nascimento não é válida !\n";
+                mskNascimento.BackColor = Color.Red;
+                retorno = false;
             }
 
-            return true;
+            if( mensagem != "")
+                MessageBox.Show(mensagem);
+
+            return retorno;
         }
+
+        private void LimpaCores()
+        {
+            mskNascimento.BackColor = Color.White;
+            mskCpf.BackColor = Color.White;
+        }
+
 
     }
 }
