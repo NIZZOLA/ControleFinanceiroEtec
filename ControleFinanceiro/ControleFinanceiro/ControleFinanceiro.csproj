@@ -48,6 +48,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ContaBancaria.cs" />
+    <Compile Include="Models\ContaPoupanca.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\FormCliente.cs">
