@@ -8,6 +8,23 @@ namespace ControleFinanceiro.Models
 {
     public class Cliente
     {
+        // ctor + 2 x tab
+        public Cliente()
+        {
+           
+        }
+
+        public Cliente( string codigo, string cpf, string nome, string telefone, 
+            string email, string nascimento, bool? ativo = true )
+        {
+            this.ClienteId = int.Parse( codigo );
+            this.CPF = cpf;
+            this.Nome = nome;
+            this.Telefone = telefone;
+            this.Email = email;
+            this.Nascimento = DateTime.Parse(nascimento);
+        }
+
         public int ClienteId { get; set; }
 
         public string CPF { get; set; }

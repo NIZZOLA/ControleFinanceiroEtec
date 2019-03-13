@@ -14,3 +14,14 @@ da data de abertura ou caso não informe, deve
 assumir a data do dia.
    toda conta aberta será incialmente ativa
    a data de fechamento sempre será nula.
+
+
+txtCodigo
+mskCpf - 000.000.000-00
+txtNome
+mskTelefone - (##)#0000-0000
+txtEmail
+mskNascimento  - 00/00/0000
+chkAtivo
+
+btnSalvar
