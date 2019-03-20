@@ -54,6 +54,11 @@
   <ItemGroup>
     <Compile Include="Data\ControleContext.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="Migrations\201903200058037_primeiraMigracao.cs" />
+    <Compile Include="Migrations\201903200058037_primeiraMigracao.Designer.cs">
+      <DependentUpon>201903200058037_primeiraMigracao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ContaBancaria.cs" />
     <Compile Include="Models\ContaPoupanca.cs" />
@@ -71,6 +76,9 @@
     <Compile Include="Views\FormContaCorrente.Designer.cs">
       <DependentUpon>FormContaCorrente.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Migrations\201903200058037_primeiraMigracao.resx">
+      <DependentUpon>201903200058037_primeiraMigracao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

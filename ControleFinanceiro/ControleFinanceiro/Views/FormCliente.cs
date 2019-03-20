@@ -1,4 +1,5 @@
-﻿using ControleFinanceiro.Models;
+﻿using ControleFinanceiro.Data;
+using ControleFinanceiro.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,19 +50,26 @@ namespace ControleFinanceiro.Views
             Cliente cli3 = new Cliente(txtCodigo.Text, mskCpf.Text, txtNome.Text,
                 mskTelefone.Text, txtEmail.Text, mskNascimento.Text);
 
+            // implementa-se um contexto do banco
+            ControleContext ctx = new ControleContext();
+            // adiciona no contexto
+            ctx.Clientes.Add(cli3);
+            // salva-se o conteúdo do contexto
+            ctx.SaveChanges();
+
             // adiciona o objeto "cli3" na lista
-            lista.Add(cli3);
+            //lista.Add(cli3);
 
             // obtem o maior código do cliente inserido na lista
-            int novocodigo = lista.Max(a => a.ClienteId) + 1;
+            //int novocodigo = lista.Max(a => a.ClienteId) + 1;
             // atribui o código ao campo txtCodigo da tela
-            txtCodigo.Text = novocodigo.ToString();
+            // txtCodigo.Text = novocodigo.ToString();
             // DECLARAÇÃO MENOS VERBOSA !!!!
             //txtCodigo.Text = (lista.Max(a => a.ClienteId) + 1).ToString();
 
             // atribui ao objeto datagridview1 a lista como fonte de dados
             // e ordena por nome 
-            dataGridView1.DataSource = lista.OrderBy(a => a.Nome).ToList();
+            //dataGridView1.DataSource = lista.OrderBy(a => a.Nome).ToList();
         }
 
         private bool Validate()
