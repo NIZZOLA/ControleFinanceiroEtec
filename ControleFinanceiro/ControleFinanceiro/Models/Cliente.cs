@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +26,19 @@ namespace ControleFinanceiro.Models
             this.Nascimento = DateTime.Parse(nascimento);
         }
 
+        [Key]
         public int ClienteId { get; set; }
 
+        [MaxLength(18)]
         public string CPF { get; set; }
 
+        [MaxLength(50)]
         public string Nome { get; set; }
 
+        [MaxLength(15)]
         public string Telefone { get; set; }
 
+        [MaxLength(100)]
         public string Email { get; set; }
 
         public DateTime Nascimento { get; set; }
