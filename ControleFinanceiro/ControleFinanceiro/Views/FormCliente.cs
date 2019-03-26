@@ -14,12 +14,13 @@ namespace ControleFinanceiro.Views
 {
     public partial class FormCliente : Form
     {
-        // Declara uma lista de elementos do tipo cliente
-        List<Cliente> lista = new List<Cliente>();
-
+        // instancia o contexto para utilização dentro do form
+        private ControleContext ctx = new ControleContext();
+        
         public FormCliente()
         {
             InitializeComponent();
+            CarregaGrid();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -50,13 +51,11 @@ namespace ControleFinanceiro.Views
             Cliente cli3 = new Cliente(txtCodigo.Text, mskCpf.Text, txtNome.Text,
                 mskTelefone.Text, txtEmail.Text, mskNascimento.Text);
 
-            // implementa-se um contexto do banco
-            ControleContext ctx = new ControleContext();
             // adiciona no contexto
             ctx.Clientes.Add(cli3);
             // salva-se o conteúdo do contexto
             ctx.SaveChanges();
-
+            CarregaGrid();
             // adiciona o objeto "cli3" na lista
             //lista.Add(cli3);
 
@@ -110,6 +109,11 @@ namespace ControleFinanceiro.Views
             mskNascimento.BackColor = Color.White;
             mskCpf.BackColor = Color.White;
             txtEmail.BackColor = Color.White;
+        }
+
+        private void CarregaGrid()
+        {
+            dataGridView1.DataSource = ctx.Clientes.ToList();
         }
 
         private void button1_Click(object sender, EventArgs e)
