@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ControleFinanceiro.Models
 {
+    [Table("Cliente")]
     public class Cliente
     {
         // ctor + 2 x tab
@@ -18,7 +20,8 @@ namespace ControleFinanceiro.Models
         public Cliente( string codigo, string cpf, string nome, string telefone, 
             string email, string nascimento, bool? ativo = true )
         {
-            this.ClienteId = int.Parse( codigo );
+            if( codigo != "" )
+                this.ClienteId = int.Parse( codigo );
             this.CPF = cpf;
             this.Nome = nome;
             this.Telefone = telefone;
