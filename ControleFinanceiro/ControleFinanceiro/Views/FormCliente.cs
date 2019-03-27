@@ -47,12 +47,34 @@ namespace ControleFinanceiro.Views
             Nascimento = DateTime.Parse(mskNascimento.Text), Telefone = mskTelefone.Text };
             */
 
-            // exemplo 3 - com construtor
-            Cliente cli3 = new Cliente(txtCodigo.Text, mskCpf.Text, txtNome.Text,
-                mskTelefone.Text, txtEmail.Text, mskNascimento.Text);
+            if (txtCodigo.Text == "")
+            {
+                // exemplo 3 - com construtor
+                Cliente cli3 = new Cliente(txtCodigo.Text, mskCpf.Text, txtNome.Text,
+                    mskTelefone.Text, txtEmail.Text, mskNascimento.Text);
 
-            // adiciona no contexto
-            ctx.Clientes.Add(cli3);
+                // adiciona no contexto um novo cliente
+                ctx.Clientes.Add(cli3);
+            }
+            else
+            {
+                // criar variavel com o código
+                int codigo = Convert.ToInt32(txtCodigo.Text);
+                // buscar a entidade direto do banco
+                var exist = ctx.Clientes
+                    .Where(a => a.ClienteId == codigo )
+                    .FirstOrDefault();
+
+                exist.Nome = txtNome.Text;
+                exist.CPF = mskCpf.Text;
+                exist.Nascimento = DateTime.Parse( mskNascimento.Text);
+                exist.Telefone = mskTelefone.Text;
+                exist.Ativo = chkAtivo.Checked;
+                exist.Email = txtEmail.Text;
+                // vincula o novo cadastro alterado do cliente e informa que foi modificado
+                ctx.Clientes.Attach(exist);
+                ctx.Entry(exist).State = System.Data.Entity.EntityState.Modified;
+            }
             // salva-se o conteúdo do contexto
             ctx.SaveChanges();
             CarregaGrid();
@@ -122,5 +144,31 @@ namespace ControleFinanceiro.Views
 
             
         }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            string valor = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            CarregaCliente(Convert.ToInt32(valor));
+        }
+
+        private void CarregaCliente( int codigo )
+        {
+            var cliente = ctx.Clientes.Where(a => a.ClienteId == codigo).FirstOrDefault();
+            if (cliente != null)
+            {
+                LimpaCores();
+                txtCodigo.Text = cliente.ClienteId.ToString();
+                txtNome.Text = cliente.Nome;
+                txtEmail.Text = cliente.Email;
+                mskCpf.Text = cliente.CPF;
+                mskNascimento.Text = cliente.Nascimento.ToString("dd/MM/yyyy");
+                mskTelefone.Text = cliente.Telefone;
+                chkAtivo.Checked = cliente.Ativo;
+            }
+            else
+                MessageBox.Show("Houve erro ao carregar o código " + codigo);
+        }
+
+
     }
 }
